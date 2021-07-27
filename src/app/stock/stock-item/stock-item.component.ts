@@ -7,22 +7,12 @@ import { Stock } from '../../model/stock';
   styleUrls: ['./stock-item.component.css'],
 })
 export class StockItemComponent implements OnInit {
-  name!: string;
-  code!: string;
-  price!: number;
-  previousPrice!: number;
-  positiveChange!: boolean;
-  favorite!: boolean;
+  public stock!: Stock;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.name = 'Test Stock Company';
-    this.code = 'TSC';
-    this.price = 85;
-    this.previousPrice = 80;
-    this.positiveChange = this.price >= this.previousPrice;
-    this.favorite = false;
+    this.stock = new Stock('Test Company', 'TSC', 85, 80);
   }
 
   /*
@@ -35,6 +25,14 @@ export class StockItemComponent implements OnInit {
       the value of the favorite variable.
     */
     console.log('State of the Union :-)', event);
-    this.favorite = !this.favorite;
+    this.stock.favorite = !this.stock.favorite;
+  }
+
+  addItem() {
+    this.stock.itemCount += 1;
+  }
+
+  removeItem() {
+    this.stock.itemCount = this.stock.itemCount - 1;
   }
 }

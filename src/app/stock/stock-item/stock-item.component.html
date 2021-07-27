@@ -1,15 +1,27 @@
 <!-- Demo of interpolation {{}} aka: one-way binding -->
 <div class="stock-container">
   <div class="name">
-    <h3>{{ name }}</h3>
+    <h3>{{ stock.name }}</h3>
     -
-    <h4>({{ code }})</h4>
-    <div class="price" [class]="positiveChange ? 'positive' : 'negative'">
-      $ {{ price }}
+    <h4>({{ stock.code }})</h4>
+    <div
+      class="price"
+      [class]="stock.isPositiveChange ? 'positive' : 'negative'"
+    >
+      $ {{ stock.price }}
+    </div>
+    <div class="price" [class]="stock.itemCount ? 'positive' : 'negative'">
+      --{{ stock.itemCount }}--
     </div>
   </div>
   <!-- This is event binding -->
-  <button (click)="toggleFavorite($event)" [disabled]="favorite">
-    Add to Favorites
+  <button (click)="toggleFavorite($event)" [disabled]="stock.favorite">
+    Add to Fav
   </button>
+  <div>
+    <button (click)="addItem()">Add item</button>
+    <button (click)="removeItem()" [disabled]="stock.itemCount == 0">
+      Remove item
+    </button>
+  </div>
 </div>
